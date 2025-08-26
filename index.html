@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Crispy Chicken UAE</title>
+  <link rel="icon" href="public/assets/favicon.png" type="image/png" />
+  <meta property="og:title" content="Crispy Chicken UAE - Call Center" />
+  <meta property="og:description" content="Order now and enjoy Crispy Chicken offers!" />
+  <meta property="og:image" content="public/assets/og-crispy-chicken-1200x630.png" />
+  <style>
+    body { font-family: Arial, sans-serif; margin:0; padding:0; text-align:center; background:#fff; }
+    header { background:#b30000; padding:10px; color:#fff; display:flex; align-items:center; justify-content:space-between; }
+    header img { height:60px; }
+    .lang-switch { margin: 10px; }
+    .content { padding:20px; }
+    .offer { background:#f5f5f5; margin:20px auto; padding:20px; border-radius:10px; max-width:600px; }
+    form { display:flex; flex-direction:column; max-width:400px; margin:20px auto; }
+    input, select, textarea { margin:5px 0; padding:10px; border:1px solid #ccc; border-radius:5px; }
+    button { padding:10px; background:#b30000; color:#fff; border:none; border-radius:5px; cursor:pointer; }
+  </style>
+  <script>
+    function switchLang(lang) {
+      document.querySelectorAll('[data-lang]').forEach(el => {
+        el.style.display = (el.getAttribute('data-lang') === lang) ? 'block' : 'none';
+      });
+      document.documentElement.lang = lang === 'en' ? 'en' : 'ar';
+      document.documentElement.dir = lang === 'en' ? 'ltr' : 'rtl';
+    }
+  </script>
+</head>
+<body>
+  <header>
+    <img src="public/assets/logo.png" alt="Crispy Chicken UAE Logo" />
+    <div class="lang-switch">
+      <button onclick="switchLang('ar')">عربي</button>
+      <button onclick="switchLang('en')">English</button>
+    </div>
+  </header>
+  
+  <div class="content">
+    <div class="offer" data-lang="ar">
+      <h2>🔥 عروض اليوم</h2>
+      <p>احصل على خصم 10% عند طلبك اليوم بقيمة أكثر من 40 درهم!</p>
+      <button onclick="document.getElementById('order-form').scrollIntoView()">اطلب الآن</button>
+    </div>
+    <div class="offer" data-lang="en" style="display:none">
+      <h2>🔥 Today's Offer</h2>
+      <p>Get 10% off when your order exceeds 40 AED today!</p>
+      <button onclick="document.getElementById('order-form').scrollIntoView()">Order Now</button>
+    </div>
+  </div>
+
+  <div class="content">
+    <form id="order-form" action="https://formspree.io/f/your_form_id" method="POST">
+      <div data-lang="ar">
+        <input type="text" name="name" placeholder="الاسم الكامل" required />
+        <input type="tel" name="phone" placeholder="رقم الهاتف" required />
+        <select name="type">
+          <option>طلب</option>
+          <option>شكوى</option>
+          <option>اقتراح</option>
+        </select>
+        <textarea name="message" placeholder="اكتب تفاصيل الرسالة هنا..." required></textarea>
+        <button type="submit">إرسال</button>
+      </div>
+      <div data-lang="en" style="display:none">
+        <input type="text" name="name" placeholder="Full Name" required />
+        <input type="tel" name="phone" placeholder="Phone Number" required />
+        <select name="type">
+          <option>Order</option>
+          <option>Complaint</option>
+          <option>Suggestion</option>
+        </select>
+        <textarea name="message" placeholder="Write your message here..." required></textarea>
+        <button type="submit">Send</button>
+      </div>
+    </form>
+  </div>
+
+  <footer>
+    <p data-lang="ar">📞 الخط الساخن: 600527488 | 📲 موبايل: 0501882206</p>
+    <p data-lang="en" style="display:none">📞 Hotline: 600527488 | 📲 Mobile: 0501882206</p>
+  </footer>
+</body>
+</html>

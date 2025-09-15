@@ -129,55 +129,6 @@
             text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
         }
         
-        .share-reward {
-            background: linear-gradient(90deg, #4CAF50 0%, #45a049 100%);
-            color: white;
-            padding: 18px 25px;
-            border-radius: 15px;
-            margin-bottom: 25px;
-            text-align: center;
-            font-size: 1.3rem;
-            font-weight: 700;
-            box-shadow: 0 8px 25px rgba(76, 175, 80, 0.3);
-            animation: rewardPulse 2s infinite;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        @keyframes rewardPulse {
-            0% { transform: scale(1); box-shadow: 0 8px 25px rgba(76, 175, 80, 0.3); }
-            50% { transform: scale(1.02); box-shadow: 0 8px 30px rgba(76, 175, 80, 0.5); }
-            100% { transform: scale(1); box-shadow: 0 8px 25px rgba(76, 175, 80, 0.3); }
-        }
-        
-        .share-reward::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 70%);
-            animation: shimmer 3s infinite;
-        }
-        
-        @keyframes shimmer {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
-        .share-reward i {
-            margin-right: 10px;
-            font-size: 1.5rem;
-            vertical-align: middle;
-        }
-        
-        .share-reward:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(76, 175, 80, 0.4);
-        }
-        
         .offer-details {
             background: linear-gradient(135deg, #f9f9f9 0%, #f0f0f0 100%);
             border-radius: 15px;
@@ -563,11 +514,6 @@
                 font-size: 1.9rem;
             }
             
-            .share-reward {
-                font-size: 1.1rem;
-                padding: 15px 20px;
-            }
-            
             .price {
                 font-size: 3.5rem;
             }
@@ -601,10 +547,6 @@
             </div>
             
             <h2 class="offer-title">8 Pieces Crispy Chicken</h2>
-            
-            <div class="share-reward" onclick="showRewardInfo()">
-                <i class="fas fa-gift"></i> Share with 5 friends and get a free meal!
-            </div>
             
             <div class="offer-details">
                 <div class="offer-item" onclick="highlightItem(this)">
@@ -679,21 +621,6 @@
         <div class="modal-content">
             <span class="close-modal" onclick="closeModal()">&times;</span>
             <img id="modalImage" src="" alt="Chicken Offer" style="width: 100%; border-radius: 10px;">
-        </div>
-    </div>
-    
-    <div class="modal" id="rewardModal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="closeRewardModal()">&times;</span>
-            <h3 style="color: #4CAF50; margin-bottom: 15px;">🎉 Share & Reward Program</h3>
-            <p style="margin-bottom: 15px;">Share this offer with 5 friends and get a FREE meal on us!</p>
-            <p style="margin-bottom: 15px;">How it works:</p>
-            <ol style="text-align: left; margin-bottom: 20px;">
-                <li>Share the offer with your friends</li>
-                <li>Ask them to mention your name when ordering</li>
-                <li>Once 5 friends order, you get a free meal!</li>
-            </ol>
-            <button class="cta-button" onclick="closeRewardModal()">Got it!</button>
         </div>
     </div>
     
@@ -798,16 +725,6 @@
             showNotification('Offer valid while stocks last!');
         }
         
-        // Show reward info modal
-        function showRewardInfo() {
-            document.getElementById('rewardModal').style.display = 'flex';
-        }
-        
-        // Close reward modal
-        function closeRewardModal() {
-            document.getElementById('rewardModal').style.display = 'none';
-        }
-        
         // Enlarge image
         function enlargeImage(img) {
             const modal = document.getElementById('imageModal');
@@ -832,13 +749,9 @@
         
         // Close modal when clicking outside
         window.onclick = function(event) {
-            const imageModal = document.getElementById('imageModal');
-            const rewardModal = document.getElementById('rewardModal');
-            if (event.target == imageModal) {
-                imageModal.style.display = 'none';
-            }
-            if (event.target == rewardModal) {
-                rewardModal.style.display = 'none';
+            const modal = document.getElementById('imageModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
             }
         }
         
@@ -846,7 +759,6 @@
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
                 closeModal();
-                closeRewardModal();
             }
         });
         
@@ -874,15 +786,6 @@
             setTimeout(() => {
                 showNotification('Welcome to Crispy Chicken! 🍗');
             }, 1000);
-            
-            // Highlight reward message after 3 seconds
-            setTimeout(() => {
-                const rewardElement = document.querySelector('.share-reward');
-                rewardElement.style.animation = 'rewardPulse 1s ease 3';
-                setTimeout(() => {
-                    rewardElement.style.animation = 'rewardPulse 2s infinite';
-                }, 3000);
-            }, 3000);
         });
         
         // Add interactive hover effects
